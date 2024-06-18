@@ -186,6 +186,10 @@ const initializeGame = (io) => {
     });
 
     socket.on('reset-game', () => {
+
+      // Re-join player to the game
+      const playersToRejoin = gameState.players.slice(); // Copy the current players
+
       gameState = {
         positions: [],
         currentPlayer: 0,
@@ -196,6 +200,7 @@ const initializeGame = (io) => {
         question: {},
         triggerSpinWheel: false,
       };
+      io.emit('force-rejoin', playersToRejoin); // Emit force-rejoin event with current players
       io.emit('game-state', gameState);
     });
 

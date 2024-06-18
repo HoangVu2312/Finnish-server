@@ -44,11 +44,6 @@ app.use("/notifications", notificationRoutes);
 app.use("/quizzes", quizRoutes);
 app.use("/articles", articleRoutes);
 
-
-// Serve static files from the React app
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'client/build')));
-
 // Import and initialize the dice game
 const { initializeGame } = require('./games/diceGame');
 initializeGame(io);
@@ -56,12 +51,6 @@ initializeGame(io);
 // Import and initialize the drawing game
 const { initializeDrawingGame } = require('./games/drawingGame');
 initializeDrawingGame(io);
-
-// All other GET requests not handled will return the React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
 
 // run server
 server.listen(4000, () => {

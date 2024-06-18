@@ -202,7 +202,7 @@ const initializeDrawingGame = (io) => {
                 answeredPlayers:[],
             };
             io.emit('force-rejoin', playersToRejoin); // Emit force-rejoin event with current players
-            io.emit('draw-game-state', drawGameState);
+            // io.emit('draw-game-state', drawGameState);
         };
 
         socket.on('reset-draw-game', () => {
